@@ -1,0 +1,47 @@
+.cdbsidebar {
+  height: 100vh;   /* Sidebar ocupa todo el alto de la ventana */
+  position: fixed; /* fijo en la izquierda */
+  top: 0;
+  left: 0;
+  background-color: black;
+  color: white;
+}
+.logo
+{
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 15vh;
+}
+.logop
+{
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 60px;
+  top: 0;
+}
+
+
+
+/* Items del menú */
+.cdb-sidebar-menu-item {
+  top: 0;
+  padding:0px;
+  border-radius: 5px;
+}
+.cdb-sidebar-menu-item:hover {
+  background: #333;
+  color: red;
+}
+
+/* Footer */
+.sidebar-btn-wrapper {
+  background: #222;
+  border-radius: 8px;
+  color: #fff;
+}

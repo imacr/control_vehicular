@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "bootstrap": "^5.3.8",
+    "react-bootstrap": "^2.10.10",
+    "react-mui-sidebar": "^1.6.3",
+    "react-pro-sidebar": "^1.1.0",
+    "react-router-dom": "^7.9.1"
+  }
+}
