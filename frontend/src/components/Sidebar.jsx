@@ -5,7 +5,7 @@ import "./Sidebar.css";
 import logo from '../assets/logo.jpg';
 const Sidebar = () => {
   return (
-    <CDBSidebar textColor="#ffffffff" backgroundColor="#000000ff">
+    <CDBSidebar  textColor="#ffffffff" backgroundColor="#000000ff">
       <CDBSidebarHeader className="logo"><img src={logo} alt="" className="logop"/></CDBSidebarHeader>
       <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Menu</CDBSidebarHeader>
       <CDBSidebarContent>

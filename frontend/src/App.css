@@ -14,3 +14,12 @@
   padding: 20px;
   overflow-y: auto;
 }
+
+.full-screen-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: #1a1a1a; /* mismo fondo que tu login-container */
+}

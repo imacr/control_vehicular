@@ -1,24 +1,48 @@
-.header {
-  background: #000000;
-  color: white;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
 
+  .header {
+    display: flex;
+    justify-content: flex-end; /* Alinea a la derecha */
+    align-items: center;
+    padding: 1.5%;
+    background-color: black; /* Barra negra */
+    color: white; /* Color del texto */
+    position: relative;
+  }
 
-.header .search {
-  flex: 1;
-  max-width: 400px;
-  padding: 6px 10px;
-  border-radius: 4px;
-  border: none;
-  margin-right: 20px;
-}
+  .user {
+    position: relative;
+    margin-right: 20px; /* Espacio a la derecha */
+  }
 
-.header .user {
-  display: flex;
-  align-items: right;
-  gap: 6px;
-}
+  .dropdown-menu {
+    position: absolute;
+    top: 30px; /* Ajusta según el diseño */
+    right: 0;
+    background-color: white; /* Fondo del menú desplegable */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1000; /* Asegúrate de que esté sobre otros elementos */
+  }
+
+  .dropdown-menu button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #e53e3e; /* Color del botón */
+  }
+
+  .dropdown-menu button:hover {
+    text-decoration: underline;
+  }
+
+  .session-link {
+    color: white; /* Color del enlace */
+    margin-left: 8px; /* Espacio entre el ícono y el enlace */
+    cursor: pointer;
+  }
+
+  .session-link:hover {
+    text-decoration: underline; /* Subrayar al pasar el ratón */
+  }
