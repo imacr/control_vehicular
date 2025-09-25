@@ -4,7 +4,8 @@
   box-sizing: border-box;
 }
 
-html, body, #root {
+
+html #root {
   height: 100%;
   font-family: Arial, sans-serif;
 }

@@ -1,3 +1,4 @@
+
 .app-container {
   display: flex;
   height: 100vh; /* Sidebar y contenido ocupan toda la pantalla */
@@ -23,3 +24,5 @@
   height: 100vh;
   background: #1a1a1a; /* mismo fondo que tu login-container */
 }
+
+
