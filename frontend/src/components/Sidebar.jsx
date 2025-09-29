@@ -1,42 +1,53 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { CDBSidebar, CDBSidebarContent, CDBSidebarHeader, CDBSidebarMenu, CDBSidebarMenuItem, CDBSidebarFooter } from "cdbreact";
+import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import logo from "../assets/logo.jpg";
 import "./Sidebar.css";
-import logo from '../assets/logo.jpg';
 
 const Sidebar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-  const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+  const toggleSidebar = () => setIsOpen(!isOpen);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <CDBSidebar textColor="#ffffff" backgroundColor="#000000" className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
-      <CDBSidebarHeader className="logo">
-        <img src={logo} alt="Logo" className="logop" />
-        <div className="menu-toggle" onClick={toggleSidebar}>
-          <i className={`fa ${isCollapsed ? 'fa-chevron-right' : 'fa-chevron-left'}`} />
+    <>
+      {isMobile && (
+        <button className="menu-btn" onClick={toggleSidebar}>
+          <i class="fa-solid fa-house"></i>
+        </button>
+      )}
+      {isMobile && isOpen && <div className="overlay" onClick={toggleSidebar}></div>}
+
+      <div className={`sidebar ${isMobile ? (isOpen ? "open" : "") : ""}`}>
+        <div className="sidebar-header">
+          <img src={logo} alt="Logo" className="logo" />
+          {isMobile && (
+            <button className="close-btn" onClick={toggleSidebar}>
+
+            </button>
+          )}
         </div>
-      </CDBSidebarHeader>
-      <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Menu</CDBSidebarHeader>
-      <CDBSidebarContent>
-        <CDBSidebarMenu>
-          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-            <CDBSidebarMenuItem icon="th-large" className="cdb-sidebar-menu-item">Dashboard</CDBSidebarMenuItem>
-          </Link>
-          <Link to="/usuarios" style={{ textDecoration: "none", color: "inherit" }}>
-            <CDBSidebarMenuItem icon="sticky-note" className="cdb-sidebar-menu-item">Usuarios</CDBSidebarMenuItem>
-          </Link>
-          <Link to="/metrics" style={{ textDecoration: "none", color: "inherit" }}>
-            <CDBSidebarMenuItem icon="credit-card">Métricas</CDBSidebarMenuItem>
-          </Link>
-        </CDBSidebarMenu>
-      </CDBSidebarContent>
-      <CDBSidebarFooter style={{ textAlign: "center", padding: "20px 5px" }}>
-        Sidebar Footer
-      </CDBSidebarFooter>
-    </CDBSidebar>
+
+        <nav className="sidebar-menu">
+          <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>
+            <i className="fa fa-th-large"></i> Dashboard
+          </NavLink>
+          <NavLink to="/usuarios" className={({ isActive }) => isActive ? "active" : ""}>
+            <i className="fa fa-users"></i> Usuarios
+          </NavLink>
+          <NavLink to="/unidades" className={({ isActive }) => isActive ? "active" : ""}>
+            <i className="fa fa-car"></i> Unidades
+          </NavLink>
+        </nav>
+
+      </div>
+    </>
   );
 };
 

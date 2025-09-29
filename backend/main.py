@@ -8,6 +8,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_mail import Mail, Message
 from dotenv import load_dotenv
 
+
+
+
 # Carga las variables de entorno desde un archivo .env para mayor seguridad
 load_dotenv()
 
@@ -16,7 +19,7 @@ app = Flask(__name__)
 
 # Configuración de CORS para permitir peticiones desde tu frontend (Vite en puerto 5173 por defecto)
 # La URL del frontend se lee desde el archivo .env para flexibilidad
-CORS(app, supports_credentials=True, resources={r"/*": {"origins": os.getenv("FRONTEND_URL", "http://localhost:5173")}})
+CORS(app, supports_credentials=True, resources={r"/*": {"origins": "http://192.168.254.158:5173"}})
 
 # Configuración segura usando variables de entorno
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'una-clave-secreta-para-desarrollo')
@@ -49,6 +52,10 @@ class Usuarios(db.Model):
     estado = db.Column(db.Enum('activo', 'inactivo'), default='activo')
     token_recuperacion = db.Column(db.String(255), nullable=True)
     token_expiracion = db.Column(db.TIMESTAMP, nullable=True)
+
+def get_db_connection():
+    # Devuelve la conexión cruda para ejecutar SQL directo
+    return db.engine.raw_connection()
 
 # --- 3. RUTAS DE LA API ---
 
@@ -135,10 +142,44 @@ def reset_password(token):
 
     return jsonify({"message": "Contraseña actualizada con éxito"}), 200
 
-# --- 4. INICIO DE LA APLICACIÓN ---
+@app.route('/api/unidades', methods=['GET'])
+def get_unidades_data():
+    conn = db.engine.raw_connection()
+    try:
+        cursor = conn.cursor()
+        query = """
+        SELECT
+            U.id_unidad, U.marca, U.vehiculo, U.modelo, U.color, U.sucursal, U.compra_arrendado, U.niv,
+            P.placa, P.fecha_vigencia AS placa_vigencia,
+            G.no_poliza, G.vigencia AS garantia_vigencia, G.aseguradora,
+            C.nombre AS chofer_asignado
+        FROM Unidades U
+        LEFT JOIN Placas P ON U.id_unidad = P.id_unidad
+        LEFT JOIN Garantias G ON U.id_unidad = G.id_unidad
+        LEFT JOIN Asignaciones A ON U.id_unidad = A.id_unidad AND A.fecha_fin IS NULL
+        LEFT JOIN Choferes C ON A.id_chofer = C.id_chofer
+        ORDER BY U.id_unidad;
+        """
+        cursor.execute(query)
+        columns = [col[0] for col in cursor.description]
+        results = [dict(zip(columns, row)) for row in cursor.fetchall()]
+
+        # Formatear fechas
+        for unidad in results:
+            if unidad['placa_vigencia']:
+                unidad['placa_vigencia'] = unidad['placa_vigencia'].strftime('%Y-%m-%d')
+            if unidad['garantia_vigencia']:
+                unidad['garantia_vigencia'] = unidad['garantia_vigencia'].strftime('%Y-%m-%d')
+
+        return jsonify(results), 200
+    except Exception as e:
+        print(f"Error al ejecutar la consulta: {e}")
+        return jsonify({"error": "Error al obtener los datos de unidades"}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+
 if __name__ == '__main__':
-    # No es necesario db.create_all() ya que tu tabla ya existe.
-    # Lo dejamos comentado por si en el futuro quieres crear tablas nuevas.
-    # with app.app_context():
-    #     db.create_all()
+
     app.run(host='0.0.0.0', port=5000, debug=True)

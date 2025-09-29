@@ -1,52 +1,128 @@
-.content {
-  width: 10 ; /* Ancho del sidebar */
+/* Sidebar general */
+.sidebar {
+  background: #000; /* Fondo negro */
+  color: white;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  align-items: center;
+  z-index: 1000;
+  font-family: "Arial", sans-serif;
 }
-.cdbsidebar {
-  height: 100vh;   /* Sidebar ocupa todo el alto de la ventana */
-  position: fixed; /* fijo en la izquierda */
+
+/* Sidebar grande: ocupa su espacio normal */
+@media (min-width: 768px) {
+  .sidebar {
+    width: 200px;
+    height: 100vh;
+    position: relative; /* empuja el contenido */
+  }
+}
+
+/* Sidebar móvil: sobre contenido */
+@media (max-width: 767px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -200px;
+    width: 200px;
+    height: 100vh;
+    z-index: 1000;
+  }
+  .sidebar.open {
+    left: 0;
+  }
+}
+
+/* Botón menú móvil */
+.menu-btn {
+  position: fixed;
+  top: 25px;
+  left: 0px;
+  z-index: 1001;
+  background: #e53935; /* Rojo */
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
   top: 0;
   left: 0;
-  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* Sidebar header */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 90%; /* Logo ocupa 90% del ancho */
+  height: auto;
+}
+
+/* Cerrar botón móvil */
+.close-btn {
+  background: none;
+  border: none;
   color: white;
-  
+  font-size: 22px;
+  cursor: pointer;
 }
-.logo
-{
-  text-align: center;
-  padding: 1;
-  width: 100%;
+
+/* Menú */
+.sidebar-menu {
+  padding-top: 40px;
   display: flex;
-  justify-content: center;
-  height: 15vh;
+  flex-direction: column;
+  gap: 10px;
 }
-.logop
-{
-  text-align: center;
-  padding: 10px 0;
-  width: 100%;
+
+.sidebar-menu a {
+  color: white;
+  text-decoration: none;
+  padding: 1px 10px;
+  font-size: 18px;
   display: flex;
-  justify-content: center;
-  height: 60px;
-  top: 0;
-}
-
-
-
-/* Items del menú */
-.cdb-sidebar-menu-item {
-  top: 0;
-  padding:0px;
-  border-radius: 5px;
-}
-.cdb-sidebar-menu-item:hover {
-  background: #333;
-  color: red;
-}
-
-/* Footer */
-.sidebar-btn-wrapper {
-  background: #222;
+  align-items: center;
+  gap: 12px;
   border-radius: 8px;
-  color: #fff;
+  transition: all 0.2s;
+}
+
+.sidebar-menu a i {
+  color: #e53935; /* Iconos rojos */
+}
+
+/* Hover */
+.sidebar-menu a:hover {
+  background: #e53935;
+  color: white;
+}
+
+.sidebar-menu a:hover i {
+  color: white; /* Icono también blanco al pasar hover */
+}
+
+/* Activo */
+.sidebar-menu a.active {
+  background: #e53935;
+  color: white;
+}
+
+.sidebar-menu a.active i {
+  color: white; /* Icono blanco cuando la ruta está activa */
 }

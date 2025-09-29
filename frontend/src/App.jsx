@@ -14,6 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import Usuarios from "./pages/Usuarios";
 import RequestReset from "./pages/RequestReset";
 import ResetPassword from "./pages/ResetPassword";
+import Unidades from "./pages/Unidades";
 
 // Estilos
 import "./App.css";
@@ -38,7 +39,8 @@ function AppContent({ isLoggedIn, onLogin, onLogout, loading }) {
             <div className="content">
               <Routes>
                 <Route path="/" element={<Dashboard />} />
-                <Route path="/usuarios" element={<Usuarios />} />
+                <Route path="/usuarios" element={<Usuarios />} />\
+                <Route path="/unidades" element={<Unidades />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </div>
