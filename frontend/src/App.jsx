@@ -12,6 +12,7 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import Dashboard from "./pages/Dashboard";
 import Usuarios from "./pages/Usuarios";
+import Garantias from "./pages/Garantias";
 import RequestReset from "./pages/RequestReset";
 import ResetPassword from "./pages/ResetPassword";
 import Unidades from "./pages/Unidades";
@@ -39,7 +40,9 @@ function AppContent({ isLoggedIn, onLogin, onLogout, loading }) {
             <div className="content">
               <Routes>
                 <Route path="/" element={<Dashboard />} />
-                <Route path="/usuarios" element={<Usuarios />} />\
+                <Route path="/usuarios" element={<Usuarios />} />
+                <Route path="/garantias" element={<Garantias />} />
+                <Route path="/Verificaciones" element={<Unidades />} />
                 <Route path="/unidades" element={<Unidades />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>

@@ -19,7 +19,7 @@ const Header = ({  onLogout, toggleSidebar, onChangePassword }) => {
         {/* Este es tu botón original, mantenemos la funcionalidad */}
         {!isMobile && (
           <button className="main-action-btn" onClick={toggleSidebar}>
-            <i class="fa-solid fa-house"></i>
+            <i className="fa-solid fa-house"></i>
           </button>
         )}
       </div>

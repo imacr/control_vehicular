@@ -126,3 +126,14 @@
 .sidebar-menu a.active i {
   color: white; /* Icono blanco cuando la ruta está activa */
 }
+
+.submenu {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px; /* sangría a la derecha */
+}
+
+.submenu a {
+  padding-left: 5px; /* sangría interna para cada link */
+}

@@ -1,16 +1,13 @@
-/* Colores: Negro (fondo encabezado), Blanco (#ffffff, fondo), Rojo Sutil (#dc3545, énfasis) */
-/* -------------------------------------------------------------------------------------- */
-
-.elegant-table-wrapper {
-    overflow-x: auto;
-}
+/* ======================================================= */
+/* ESTILOS GLOBALES Y DE CONTENEDOR DE UNIDADES */
+/* ======================================================= */
 
 /* Contenedor principal: Fondo Blanco Suave */
 .unidades-container {
     padding: 20px;
     background-color: #f8f8f8; 
     font-family: Arial, sans-serif; /* Fuente limpia y moderna */
-    align-items: center;
+    /* Se elimina align-items: center; ya que no es un flex/grid contenedor raíz */
 }
 
 /* Título: Negro con línea roja de énfasis */
@@ -19,15 +16,47 @@
     margin-bottom: 20px;
     border-bottom: 1px solid #dc3545; /* Toque Rojo Sutil */
     padding-bottom: 10px;
+    font-size: 1.8rem; /* Tamaño de fuente reducido */
+}
+
+/* Estilo para mensajes de carga/error */
+.mensaje-estado {
+    padding: 20px;
+    font-size: 1.1em;
+    color: #212529;
+}
+
+.mensaje-estado.error {
+    color: #dc3545; /* Mensaje de error en rojo */
+    font-weight: bold;
+}
+
+/* Controles de paginación superiores */
+.pagination-controls {
+    margin-bottom: 10px;
+}
+
+
+/* ======================================================= */
+/* ESTILOS DE LA TABLA (ADAPTABLE Y REDUCIDA) */
+/* ======================================================= */
+
+/* CONTENEDOR DE LA TABLA: Habilita el scroll horizontal si es necesario (Adaptabilidad) */
+.table-wrapper {
+    overflow-x: auto; 
+    width: 100%; 
+    display: block;
 }
 
 /* Tabla base: Limpia y con sombra sutil */
 .elegant-table {
-    width: 100%;
+    /* CLAVE: Permite que la tabla tome el ancho necesario, garantizando scroll */
+    width: max-content; 
+    min-width: 100%; /* Asegura que no sea más pequeña que el contenedor si hay espacio */
     border-collapse: collapse;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra muy sutil */
     background-color: #ffffff;
-    align-items: center;
+    /* Se elimina align-items: center; */
 }
 
 /* Encabezado: Fondo Negro, Letra Blanca, Borde Rojo */
@@ -35,16 +64,22 @@
     background-color: #212529; /* Negro */
     color: #ffffff; /* Letra Blanca */
     border-bottom: 3px solid #dc3545; /* Toque Rojo Elegante */
+    /* Se elimina align-items: center; */
     align-items: center;
+  
 }
 
-/* Celdas de encabezado y datos */
+/* Celdas de encabezado y datos: Fuente y Padding reducidos */
 .elegant-table th,
 .elegant-table td {
-    padding: 12px 15px;
+    padding: 8px 10px; /* Padding más pequeño */
     text-align: left;
     border-bottom: 1px solid #e0e0e0; /* Separador gris muy claro (sutil) */
+    font-size: 0.85rem; /* Tamaño de fuente más pequeño */
+    white-space: nowrap; 
     align-items: center;
+    text-align: center;
+
 }
 
 /* Filas: Efecto Hover (interacción elegante) */
@@ -62,66 +97,165 @@
     border-bottom: none;
 }
 
-/* Estilo para mensajes de carga/error */
-.mensaje-estado {
-    padding: 20px;
-    font-size: 1.1em;
-    color: #212529;
-}
-.mensaje-estado.error {
-    color: #dc3545; /* Mensaje de error en rojo */
-    font-weight: bold;
+
+/* ======================================================= */
+/* ESTILOS DE ACCIONES (VERDE, ROJO, AZUL) */
+/* ======================================================= */
+
+/* Contenedor general para agrupar los botones de acción */
+.actions-container {
+    display: flex; /* Permite control horizontal */
+    flex-wrap: nowrap; /* CLAVE: Mantiene los botones en una sola línea dentro de la celda */
+    gap: 4px; /* Espacio entre botones */
+    align-items: center;
 }
 
-.accion-btn {
-    background: none;      /* Fondo transparente */
-    border: none;          /* Sin borde */
-    padding: 0;            /* Sin padding */
-    margin: 0;             /* Sin margen */
-    cursor: pointer;       /* Cambiar cursor a pointer */
-    display: inline-flex;  /* Alinea bien el icono */
-    align-items: center;   /* Centrar verticalmente */
-    justify-content: center; 
+.actions-container button {
+    /* Reseteo del estilo de botón por defecto */
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    margin: 0; /* Ya no es necesario margin si usamos gap */
+    transition: transform 0.15s ease, opacity 0.15s ease;
+    border-radius: 4px; 
+    /* Se elimina align-items: center; del button, ya está en el contenedor */
+}
+
+/* Efecto al pasar el ratón */
+.actions-container button:hover {
+    transform: scale(1.1); /* Agranda ligeramente el icono */
+    opacity: 0.9;
+}
+
+/* Estilo para el icono de ACTUALIZAR (Verde) */
+.actions-container .icon-edit {
+    color: #2ECC71; /* Verde brillante */
+    font-size: 1rem; 
+}
+
+/* Estilo para el icono de ELIMINAR (Rojo) */
+.actions-container .icon-delete {
+    color: #E74C3C; /* Rojo de peligro */
+    font-size: 1rem;
+}
+
+/* Estilo para el icono de DETALLES (Azul) */
+.actions-container .icon-details {
+    color: #3498DB; /* Azul informativo */
+    font-size: 1rem;
+}
+
+/* NOTA: Las reglas de .accion-btn, .accion-actualizar, .accion-eliminar son redundantes 
+   con .actions-container y pueden eliminarse para simplificar el código. Se dejan comentadas 
+   para evitar conflictos: */
+/* .accion-btn, .accion-actualizar, .accion-eliminar... (Revisar y eliminar si no se usan) */
+
+
+/* ======================================================= */
+/* ESTILOS DE MODAL (BLANCO, ROJO Y NEGRO CORREGIDOS) */
+/* ======================================================= */
+
+/* overlay: ¡CORREGIDO! Con fondo negro para que el modal blanco destaque */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.75); /* Fondo negro semitransparente (CORRECCIÓN CLAVE) */
+  backdrop-filter: blur(4px); 
+  z-index: 9999; /* Mayor que 1999 */
+  overflow: auto;
+}
+
+/* caja del modal: Fondo Blanco SÓLIDO, Borde Rojo */
+.modal-content {
+  position: relative;
+  width: min(720px, 100%);
+  max-width: 500px;
+  max-height: calc(100vh - 90px);
+  overflow-y: auto; 
+  background-color: #ffffff; /* Fondo blanco SÓLIDO (CORRECCIÓN CLAVE) */
+  border: 2px solid #c20000; /* Borde rojo */
+  border-radius: 12px;
+  padding: 24px 26px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9); /* Sombra fuerte para contraste */
+  color: #000000; /* Texto negro */
+  animation: modalFadeIn 0.22s ease;
+  /* Eliminar la definición de fondo del modal-container que estaba en el JSX */
+}
+
+/* animación suave */
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* botón cerrar: Corregidas las propiedades de tamaño y forma */
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px; 
+  height: 34px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  line-height: 1; 
+  cursor: pointer; 
+  border: 1px solid #c20000; 
+  background: #c20000; 
+  color: #ffffff; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  transition: background 0.15s ease;
+}
+
+.modal-close-btn:hover {
+  background: #a80000; 
+}
+
+/* scrollbar interno del modal */
+.modal-content::-webkit-scrollbar { width: 10px; }
+.modal-content::-webkit-scrollbar-thumb {
+  background: #c20000; /* Rojo */
+  border-radius: 6px;
+  border: 2px solid transparent; 
+  background-clip: padding-box;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #f0f0f0; 
+}
+
+/* Contenedor de Detalles Adicionales: Resalta en el fondo blanco */
+.additional-details {
+  background-color: #f7f7f7; /* Fondo gris claro */
+  border-left: 5px solid #c20000; /* Borde rojo vibrante */
+  border-radius: 4px;
+  padding: 15px 20px;
+  margin-top: 25px; 
+  margin-bottom: 5px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+  color: #000000; 
+}
+
+/* Títulos dentro de los detalles */
+.additional-details h3 {
+  color: #c20000; /* Rojo para el título */
+  border-bottom: 1px dashed #dcdcdc;
+  padding-bottom: 5px;
+  margin-top: 0;
 }
 
 
-.accion-actualizar .fa-solid.fa-pen-to-square {
-    color: #00796B !important; 
-    outline: none;
-    margin: none;
-}
-.accion-actualizar:hover .fa-solid.fa-pen-to-square {
-    color: #004D40 !important; 
-    transform: scale(1.15);
-}
+/* ======================================================= */
+/* ESTILOS DE TARJETAS Y PAGINACIÓN (Responsive) */
+/* ======================================================= */
 
-.accion-eliminar .fa-solid.fa-trash-can {
-    color: #a71d31 !important; 
-}
-.accion-eliminar:hover .fa-solid.fa-trash-can {
-    color: #7f1627 !important; 
-    transform: scale(1.15);
-}
-
-
-/* Mostrar tabla solo en pantallas grandes */
-.table-wrapper {
-    display: block;
-}
+/* Tarjetas (por defecto ocultas) */
 .card-wrapper {
     display: none;
-}
-
-
-@media (max-width: 500px) {
-    .table-wrapper {
-        display: none;
-    }
-    .card-wrapper {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
 }
 
 .unidad-card {
@@ -132,6 +266,7 @@
     font-family: Arial, sans-serif;
 }
 
+/* Paginación */
 .pagination {
     display: flex;
     justify-content: center;
@@ -153,6 +288,15 @@
     cursor: not-allowed;
 }
 
-.pagination-controls {
-    margin-bottom: 10px;
+
+/* Media Query para móvil: Oculta la tabla, muestra las tarjetas */
+@media (max-width: 768px) { /* Cambiado de 500px a 768px para una mejor adaptabilidad */
+    .table-wrapper {
+        display: none;
+    }
+    .card-wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
 }

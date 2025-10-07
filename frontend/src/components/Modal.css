@@ -1,0 +1,207 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px; /* un poco menos que 30px */
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.4); /* agrega un overlay semi-transparente elegante */
+  z-index: 1999;
+  overflow: auto;
+  
+}
+
+.modal-contentido {
+  background: #ffffff; /* fondo blanco minimalista */
+  border: 1.5px solid #c62828; /* borde rojo elegante, menos grueso */
+  border-radius: 12px;
+  padding: 20px 25px;
+  max-width: 700px; /* un poco más ancho para 2 columnas */
+  width: 95%; /* adaptable */
+  color: #111; /* texto oscuro elegante */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* sombra más suave */
+  animation: modalFadeIn 0.3s ease;
+  position: relative;
+  z-index: 1100;
+  align-items: center;
+
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #c62828;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.modal-close-btn:hover {
+  color: #880e0e;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* botón cerrar */
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 1px solid #c20000; /* Borde rojo */
+  background: #c20000; /* Fondo rojo */
+  color: #ffffff; /* Texto blanco */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  transition: background 0.15s ease;
+}
+
+.modal-close-btn:hover {
+  background: #a80000; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* scrollbar interno del modal */
+.modal-content::-webkit-scrollbar { width: 10px; }
+.modal-content::-webkit-scrollbar-thumb {
+  background: #c20000; /* Rojo para el thumb */
+  border-radius: 6px;
+  border: 2px solid transparent; 
+  background-clip: padding-box;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #f0f0f0; /* Pista clara */
+}
+
+/* Estilo para el encabezado h2 (Compacto y Contraste) */
+.details-header { /* Nombre de clase ORIGINAL */
+    background-color: #000000; /* Fondo Negro Sólido */
+    color: #ffffff; /* Texto Blanco */
+    border-bottom: 3px solid #c20000; /* Línea de alto contraste Rojo */
+    border-radius: 4px 4px 0 0; /* Esquinas ligeramente redondeadas */
+    padding: 6px 10px; /* Menor padding vertical */
+    margin: 0 0 0.3rem 0; /* Mínimo margen inferior */
+    text-align: left; 
+    font-size: 1.3rem; /* Fuente un poco más pequeña */
+    font-weight: 700;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2); 
+}
+
+/* Estilo general para el contenedor de detalles (Compacto) */
+.details-container { /* Nombre de clase ORIGINAL */
+    max-height: 45vh; /* Altura máxima reducida */
+    overflow-y: auto;
+    padding: 0.5rem 0.8rem; /* Padding interno reducido */
+    border: 1px solid #333; /* Borde negro oscuro sutil */
+    border-radius: 0 0 4px 4px; 
+    background-color: #ffffff;
+    align-items: center;
+    display: grid;
+    /* Múltiples columnas pequeñas para ahorrar espacio */
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
+    gap: 0.5rem; /* Menor espacio entre ítems */
+}
+
+/* Estilo para cada elemento de detalle (Minimalista Compacto) */
+.detail-item { /* Nombre de clase ORIGINAL */
+    background-color: #f8f8f8; /* Fondo blanco ligeramente grisáceo */
+    border: none; /* Eliminar borde completo para un look más limpio */
+    border-left: 3px solid #c20000; /* Barra roja de acento a la izquierda */
+    border-radius: 4px;
+    padding: 0.4rem; /* Padding interno muy reducido */
+    box-shadow: none; /* Eliminar sombras para hacerlo más compacto */
+    transition: background-color 0.2s, border-color 0.2s; 
+    align-items: center;
+}
+
+/* Efecto al pasar el mouse (para resaltar la fila) */
+.detail-item:hover { /* Nombre de clase ORIGINAL */
+    background-color: #fff0f0; /* Fondo rojo muy pálido al pasar el mouse */
+    border-left-color: #ff0000; /* Rojo más brillante en el borde izquierdo */
+}
+
+/* Estilo para las etiquetas dentro de cada detalle */
+.detail-item strong { /* Nombre de elemento ORIGINAL */
+    display: block;
+    color: #c20000; /* Rojo principal para las etiquetas */
+    font-size: 0.75rem; /* Tamaño de fuente muy pequeño */
+    margin-bottom: 0.1rem; 
+    font-weight: 600; 
+    text-transform: uppercase; /* Mayúsculas para un look más técnico */
+}
+
+/* Estilo para los valores */
+.detail-item span { /* Nombre de elemento ORIGINAL */
+    color: #000000; /* Negro para el valor */
+    font-size: 0.9rem; /* Tamaño de fuente ligeramente más grande que la etiqueta */
+    font-weight: 500;
+    line-height: 1.1;
+}
+@media (max-width: 768px) {
+  .modal-form-column {
+    flex: 1 1 100%;
+  }
+   .details-container {
+    grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+  }
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem; /* Espacio entre filas */
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 0.75rem; /* Espacio entre columnas */
+}
+
+.form-group:last-child {
+  margin-right: 0; /* Eliminar margen derecho en el último elemento */
+}
+
+.form-group label {
+  margin-bottom: 0.25rem; /* Espacio entre la etiqueta y el campo de entrada */
+  display: block; /* Asegurar que las etiquetas ocupen su propia línea */
+}
+
+.form-group input {
+  width: 100%; /* Hacer que los campos de entrada ocupen todo el ancho disponible */
+  padding: 0.4rem; /* Ajustar el padding para una apariencia más compacta */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn-save {
+  margin-top: 1rem; /* Espacio superior para el botón */
+  padding: 0.5rem 1rem;
+  background-color: #4CAF50; /* Color verde */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-save:hover {
+  background-color: #45a049; /* Color verde más oscuro al pasar el ratón */
+}
+
+.exito {
+  align-items: center;
+  width: 20%; /* Logo ocupa 90% del ancho */
+  height: auto;
+}
